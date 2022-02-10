@@ -3,6 +3,8 @@ package com.yaokai.rabbit.demo03;
 import com.rabbitmq.client.Channel;
 import com.yaokai.rabbit.utils.RabbitMqUtils;
 
+import java.nio.charset.StandardCharsets;
+
 import java.util.Scanner;
 
 /**
@@ -22,7 +24,11 @@ public class Task02 {
         while (sc.hasNext()) {
             String message = sc.nextLine();
             //发布消息
+
             channel.basicPublish("", TASK_QUEUE_NAME, null, message.getBytes("UTF-8"));
+
+            channel.basicPublish("", TASK_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
+
             System.out.println("生产者发出消息：" + message);
         }
     }
